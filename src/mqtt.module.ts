@@ -1,8 +1,7 @@
 import { Module } from '@nestjs/common';
 
-
 //  Agregar los importes enmedio de estos comentarios
-import { ClientsModule , Transport } from '@nestjs/microservices';
+import { ClientsModule, Transport } from '@nestjs/microservices';
 import { MqttController } from './mqtt/mqtt.controller';
 import { MqttOptionsConfig } from 'src/Configs/mqtt.options';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -13,17 +12,16 @@ import { TypeOrmConfig } from 'src/Configs/type-orm.config';
 import { MqttService } from './mqtt/mqtt.service';
 //  Agregar los importes enmedio de estos comentarios
 
-const mqttoptionsconfig= new MqttOptionsConfig();
+const mqttoptionsconfig = new MqttOptionsConfig();
 @Module({
   imports: [
-
     TypeOrmModule.forRoot(TypeOrmConfig.config),
-    
-    TypeOrmModule.forFeature([Modulo,Reserva_agua,Riego]),
+
+    TypeOrmModule.forFeature([Modulo, Reserva_agua, Riego]),
 
     ClientsModule.register([mqttoptionsconfig]),
   ],
   controllers: [MqttController],
-  providers: [MqttService]
+  providers: [MqttService],
 })
 export class MqttModule {}

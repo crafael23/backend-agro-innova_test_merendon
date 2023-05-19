@@ -1,20 +1,31 @@
-import { Entity, Column, PrimaryColumn, CreateDateColumn, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Entity,
+  Column,
+  CreateDateColumn,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { ObjectType, Field, Int, Float } from '@nestjs/graphql';
 
 @Entity()
-export class Modulo{
+@ObjectType()
+export class Modulo {
+  @PrimaryGeneratedColumn()
+  @Field((type) => Int)
+  Count: number;
 
-    @PrimaryGeneratedColumn()
-    Count: number;
+  @Column()
+  @Field((type) => Int)
+  Id: number;
 
-    @Column()
-    Id: number;
+  @Column()
+  @Field((type) => Float)
+  temperatura: number;
 
-    @Column()
-    temperatura: number;
+  @Column()
+  @Field((type) => Float)
+  humedad: number;
 
-    @Column()
-    humedad: number;
-    
-    @CreateDateColumn({type: 'datetime'})
-    fecha: Date;
+  @CreateDateColumn({ type: 'datetime' })
+  @Field()
+  fecha: Date;
 }

@@ -1,18 +1,28 @@
-import { Entity, Column, PrimaryColumn, CreateDateColumn, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryColumn,
+  CreateDateColumn,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { ObjectType, Field, Int } from '@nestjs/graphql';
 
+@ObjectType()
 @Entity()
-export class Reserva_agua{
-    @PrimaryGeneratedColumn()
-    Count: number;
-    
-    @Column()
-    ph: number;
+export class Reserva_agua {
+  @PrimaryGeneratedColumn()
+  @Field((type) => Int)
+  Count: number;
 
-    @Column()
-    nivel: number;
+  @Column()
+  @Field((type) => Int)
+  ph: number;
 
-    @CreateDateColumn({type: 'datetime'})
-    fecha: Date;
+  @Column()
+  @Field((type) => Int)
+  nivel: number;
 
-
+  @CreateDateColumn({ type: 'datetime' })
+  @Field()
+  fecha: Date;
 }

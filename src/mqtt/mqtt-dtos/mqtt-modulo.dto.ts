@@ -1,10 +1,8 @@
 // Objetivo: DTO para el módulo de MQTT
-export class ModuloDto{
+export class ModuloDto {
+  Id: number;
 
-    Id: number;
+  temperatura: number;
 
-    temperatura: number;
-
-    humedad: number;
-
+  humedad: number;
 }
