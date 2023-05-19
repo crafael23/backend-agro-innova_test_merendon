@@ -16,6 +16,7 @@ import { RiegoDTO } from './mqtt-dtos/mqtt-riego.dto';
 @Controller('mqtt')
 export class MqttController {
   constructor(private MqttService: MqttService) {}
+
   @MessagePattern('Estado_Modulo')
   executeModulo(@Payload() payload: ModuloDto, @Ctx() context: MqttContext) {
     console.log(`___New message ${context.getTopic()}____`);
