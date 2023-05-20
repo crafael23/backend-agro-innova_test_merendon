@@ -19,7 +19,7 @@ type Modulo {
   Id: Int!
   temperatura: Float!
   humedad: Float!
-  fecha: DateTime!
+  fecha: String!
 }
 
 type Riego {
@@ -35,4 +35,6 @@ type Query {
   ModuloQuery: [Modulo!]!
   AguaQuery: [Reserva_agua!]!
   RiegoQuery: [Riego!]!
+  LastModuloQuery(ammount: Int!, Id: Int!): [Modulo!]!
+  findTest: [Modulo!]!
 }

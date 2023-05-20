@@ -26,6 +26,6 @@ export class Modulo {
   humedad: number;
 
   @CreateDateColumn({ type: 'datetime' })
-  @Field()
+  @Field(()=> String)
   fecha: Date;
 }

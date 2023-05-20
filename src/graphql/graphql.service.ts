@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
 
 //repositorios entities
 import { Reserva_agua } from 'src/mqtt/mqtt-entities/mqtt.agua.entity';
@@ -26,5 +26,24 @@ export class GraphqlService {
 
   findAllRiego(): Promise<Riego[]> {
     return this.RiegoRepository.find();
+  }
+
+  async findLastXModulo(
+    ammount: number,
+    id_provided: number,
+  ): Promise<Modulo[]> {
+    return this.ModuloRepository.find({
+      where: { Id: id_provided },
+      order: { Count: 'DESC' },
+      take: ammount,
+    });
+  }
+
+  async findTest(): Promise<Modulo[]> {
+    const query = this.ModuloRepository.createQueryBuilder('modulo')
+      .select('Count, Id, temperatura, humedad')
+      .addSelect('Max(fecha)', 'fecha')
+      .groupBy('Id');
+    return query.getRawMany();
   }
 }

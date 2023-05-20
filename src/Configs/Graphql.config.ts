@@ -13,8 +13,8 @@ class GraphQLConfig {
 }
 
 export class GQLconfig {
-  public static config={
-      driver: ApolloDriver,
-      useFactory: GraphQLConfig.createConfig,
-  }
+  public static config = {
+    driver: ApolloDriver,
+    useFactory: GraphQLConfig.createConfig,
+  };
 }
