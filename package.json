@@ -30,6 +30,8 @@
     "@nestjs/typeorm": "^9.0.1",
     "apollo-server-core": "^3.12.0",
     "graphql": "^16.6.0",
+    "graphql-subscriptions": "^2.0.0",
+    "graphql-ws": "^5.13.1",
     "mqtt": "^4.3.7",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0",

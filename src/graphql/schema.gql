@@ -36,5 +36,10 @@ type Query {
   AguaQuery: [Reserva_agua!]!
   RiegoQuery: [Riego!]!
   LastModuloQuery(ammount: Int!, Id: Int!): [Modulo!]!
-  findTest: [Modulo!]!
+  findLastModulos: [Modulo!]!
+  Ejemplo: [Modulo!]!
+}
+
+type Subscription {
+  moduleSaved: [Modulo!]!
 }

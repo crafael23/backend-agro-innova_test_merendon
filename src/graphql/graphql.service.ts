@@ -1,19 +1,22 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { In, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
+
 
 //repositorios entities
 import { Reserva_agua } from 'src/mqtt/mqtt-entities/mqtt.agua.entity';
 import { Modulo } from 'src/mqtt/mqtt-entities/mqtt.modulo.entity';
 import { Riego } from 'src/mqtt/mqtt-entities/mqtt.riego.entity';
+import { MqttService } from 'src/mqtt/mqtt.service';
 
 @Injectable()
 export class GraphqlService {
   constructor(
+    
     @InjectRepository(Riego) private RiegoRepository: Repository<Riego>,
     @InjectRepository(Modulo) private ModuloRepository: Repository<Modulo>,
-    @InjectRepository(Reserva_agua)
-    private AguaRepository: Repository<Reserva_agua>,
+    @InjectRepository(Reserva_agua) private AguaRepository: Repository<Reserva_agua>,
+
   ) {}
 
   findAllModulo(): Promise<Modulo[]> {
@@ -39,11 +42,16 @@ export class GraphqlService {
     });
   }
 
-  async findTest(): Promise<Modulo[]> {
+  async findlastModulo(): Promise<Modulo[]> {
     const query = this.ModuloRepository.createQueryBuilder('modulo')
       .select('Count, Id, temperatura, humedad')
       .addSelect('Max(fecha)', 'fecha')
       .groupBy('Id');
     return query.getRawMany();
   }
+  
+
+  
+
+
 }
