@@ -49,9 +49,4 @@ export class GraphqlService {
       .groupBy('Id');
     return query.getRawMany();
   }
-  
-
-  
-
-
 }

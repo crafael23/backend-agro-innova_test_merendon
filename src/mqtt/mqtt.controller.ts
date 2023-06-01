@@ -24,6 +24,9 @@ export class MqttController {
     this.MqttService.createModulo(payload);
     console.log('El mensaje se guardo con exito');
   }
+
+
+  
   @MessagePattern('Estado_Agua')
   executeAgua(
     @Payload() payload: Reserva_aguaDTO,
@@ -41,4 +44,19 @@ export class MqttController {
     this.MqttService.createRiego(payload);
     console.log('El mensaje se guardo con exito');
   }
+
+  @MessagePattern('TestTopic')
+   async test(@Payload() payload: string, @Ctx() context: MqttContext) {
+    console.log(`___New message ${context.getTopic()}____`);
+    console.log('Payload: ', payload);
+    this.MqttService.sendMqttMessage('TestTopic2', 1);
+  }
+
+  @MessagePattern('TestTopic2/response')
+  test2(@Payload() payload: string, @Ctx() context: MqttContext) {
+    console.log(`___New message ${context.getTopic()}____`);
+    console.log('Payload: ', payload);
+  }
 }
+
+

@@ -8,22 +8,25 @@ import { Reserva_agua } from './mqtt-entities/mqtt.agua.entity';
 import { ModuloDto } from './mqtt-dtos/mqtt-modulo.dto';
 import { Reserva_aguaDTO } from './mqtt-dtos/mqtt-agua.dto';
 import { RiegoDTO } from './mqtt-dtos/mqtt-riego.dto';
+
 import { MODULE_SAVED, pubSub } from 'src/graphql/graphql.resolver';
 
-import { ClientProxy, MqttRecordBuilder } from '@nestjs/microservices'; 
+import { ClientProxy, MqttRecordBuilder } from '@nestjs/microservices';
 
 @Injectable()
 export class MqttService {
   constructor(
-
     @Inject('Cliente_NestJS') private client: ClientProxy,
 
     @InjectRepository(Riego) private RiegoRepository: Repository<Riego>,
     @InjectRepository(Modulo) private ModuloRepository: Repository<Modulo>,
-    @InjectRepository(Reserva_agua) private AguaRepository: Repository<Reserva_agua>,
-    
+    @InjectRepository(Reserva_agua)
+    private AguaRepository: Repository<Reserva_agua>,
+
     private GraphqlService: GraphqlService,
-  ) {}
+  ) {
+    
+  }
 
   createModulo(Payload: ModuloDto): Promise<Modulo> {
     const newModulo = this.ModuloRepository.create(Payload);
@@ -46,7 +49,6 @@ export class MqttService {
 
   sendMqttMessage(topic: string, message: number) {
     const record = new MqttRecordBuilder(`${message}`).setQoS(1).build();
-
     this.client.send(topic, record).subscribe((res) => {
       console.log(`Cliente que recibio este mensaje respondio con ${res}`);
     });
